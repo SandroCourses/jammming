@@ -32,8 +32,3 @@ main {
   font-weight: 500;
   color: #fff;
 }
-
-::-webkit-scrollbar {
-    width: 0px;
-    background: transparent;
-}

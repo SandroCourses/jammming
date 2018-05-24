@@ -18,3 +18,8 @@ h2 {
     margin-bottom: 2rem;
   }
 }
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
