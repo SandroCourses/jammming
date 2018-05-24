@@ -1,11 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './SearchBar.css';
 
 class SearchBar extends React.Component {
   render() {
     return (
-      <div class="SearchBar">
+      <div className="searchbar">
         <input placeholder="Enter A Song Title" />
         <a>SEARCH</a>
       </div>
