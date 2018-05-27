@@ -28,6 +28,7 @@ const Spotify = {
     if(!this.accessToken || !this.expirationTime) {
       const accessTokenArray = href.match(/access_token=([^&]*)/);
       const expiresInArray = href.match(/expires_in=([^&]*)/);
+      window.history.pushState('Access Token', null, '/');
 
       if(accessTokenArray && expiresInArray) {
         const accessToken = accessTokenArray[1];
@@ -45,7 +46,6 @@ const Spotify = {
       const expirationTime = new Date(now + (parseInt(expiresIn, 10) * 1000));
       const expirationTimeInMs = expirationTime.getTime();
       this.expirationTimeInMs = expirationTimeInMs;
-      window.history.pushState('Access Token', null, '/');
     }
   },
   search(searchInput) {

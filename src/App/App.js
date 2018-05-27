@@ -23,7 +23,7 @@ class App extends React.Component {
 
   render() {
     Spotify.checkQueryParameters(window.location.href);
-
+    
     return (
       <div className="app">
         <header>Ja<span className="highlight">mmm</span>ing</header>
