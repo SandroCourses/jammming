@@ -9,27 +9,27 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      tracks: []
+      searchResults: []
     };
 
     this.searchSpotify = this.searchSpotify.bind(this);
   }
 
-  searchSpotify(tracks) {
+  searchSpotify(searchResults) {
     this.setState({
-      tracks: tracks
+      searchResults: searchResults
     });
   }
 
   render() {
     Spotify.checkQueryParameters(window.location.href);
-    
+
     return (
       <div className="app">
         <header>Ja<span className="highlight">mmm</span>ing</header>
         <main>
           <SearchBar searchSpotify={this.searchSpotify} />
-          <ContentContainer tracks={this.state.tracks} />
+          <ContentContainer searchResults={this.state.searchResults} />
         </main>
       </div>
     );

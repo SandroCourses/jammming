@@ -7,7 +7,7 @@ class ContentContainer extends React.Component {
   render() {
     return (
       <div className="content-container">
-        <SearchResults tracks={this.props.tracks} />
+        <SearchResults searchResults={this.props.searchResults} />
         <Playlist />
       </div>
     );

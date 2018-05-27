@@ -7,14 +7,15 @@ class Tracklist extends React.Component {
     return (
       <div className="tracklist">
         {
-          this.props.tracks.map(track => {
+          this.props.searchResults.map(searchResult => {
             const trackInfo = {
-              title: track.name,
-              artist: track.artists[0].name,
-              album: track.album.name
+              id: searchResult.id,
+              title: searchResult.name,
+              artist: searchResult.artists[0].name,
+              album: searchResult.album.name
             };
 
-            return <Track key={track.id} track={trackInfo} />;
+            return <Track key={trackInfo.id} track={trackInfo} />;
           })
         }
       </div>

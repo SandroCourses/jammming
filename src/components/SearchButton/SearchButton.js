@@ -12,11 +12,11 @@ class SearchButton extends React.Component {
   handleClick() {
     const searchInput = this.props.searchInput;
     const searchInputEncoded = searchInput.split(' ').join('%20');
-    const tracksPromise = Spotify.search(searchInputEncoded);
-
-    if(tracksPromise) {
-      tracksPromise.then(tracks => {
-        this.props.searchSpotify(tracks);
+    const searchResultsPromise = Spotify.search(searchInputEncoded);
+    
+    if(searchResultsPromise) {
+      searchResultsPromise.then(searchResults => {
+        this.props.searchSpotify(searchResults);
       });
     }
   }
