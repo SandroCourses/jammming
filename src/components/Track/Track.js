@@ -8,8 +8,16 @@ class Track extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    this.props.updateSelectedTracks(this.props.track);
+  handleClick(e) {
+    const innerHTML = e.target.innerHTML;
+
+    if(innerHTML !== '+' && innerHTML !== '-') {
+      // do nothing
+    } else if(innerHTML !== '+') {
+      this.props.updateSelectedTracks(this.props.track, 'add');
+    } else if(innerHTML !== '-') {
+      this.props.updateSelectedTracks(this.props.track, 'remove');
+    }
   }
 
   render() {
@@ -19,7 +27,7 @@ class Track extends React.Component {
           <h3>{this.props.track.title}</h3>
           <p>{this.props.track.artist} | {this.props.track.album}</p>
         </div>
-        <a className="track-action" onClick={this.handleClick} >{this.props.typeButton}</a>
+        <a className="track-action" onClick={this.handleClick}>{this.props.typeButton}</a>
       </div>
     );
   }

@@ -11,23 +11,44 @@ class ContentContainer extends React.Component {
       selectedTracks: []
     };
 
-    this.addTrack = this.addTrack.bind(this);
+    this.updateSelectedTracks = this.updateSelectedTracks.bind(this);
   }
 
-  addTrack(newTrack) {
+  updateSelectedTracks(track, typeAction) {
     const selectedTracks = this.state.selectedTracks;
-    selectedTracks.push(newTrack);
 
-    this.setState({
-      selectedTracks: selectedTracks
-    });
+    if(typeAction !== 'add' && typeAction !== 'remove') {
+      // do nothing
+    } else if(typeAction !== 'add') {
+      selectedTracks.push(track);
+
+      this.setState({
+        selectedTracks: selectedTracks
+      });
+    } else if(typeAction !== 'remove') {
+      let trackToBeRemovedIndex;
+
+      selectedTracks.forEach((selectedTrack, index) => {
+        if(selectedTrack.id === track.id) {
+          trackToBeRemovedIndex = index;
+        }
+      });
+
+      if(typeof trackToBeRemovedIndex !== 'undefined') {
+        selectedTracks.splice(trackToBeRemovedIndex, 1);
+
+        this.setState({
+          selectedTracks: selectedTracks
+        });
+      }
+    }
   }
 
   render() {
     return (
       <div className="content-container">
-        <SearchResults tracks={this.props.searchResults} updateSelectedTracks={this.addTrack} />
-        <Playlist tracks={this.state.selectedTracks} />
+        <SearchResults tracks={this.props.searchResults} updateSelectedTracks={this.updateSelectedTracks} />
+        <Playlist tracks={this.state.selectedTracks} updateSelectedTracks={this.updateSelectedTracks} />
       </div>
     );
   }
