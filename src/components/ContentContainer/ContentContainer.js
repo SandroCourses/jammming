@@ -19,13 +19,23 @@ class ContentContainer extends React.Component {
 
     if(typeAction !== 'add' && typeAction !== 'remove') {
       // do nothing
-    } else if(typeAction !== 'add') {
-      selectedTracks.push(track);
+    } else if(typeAction === 'add') {
+      let allowedToAdd = true;
 
-      this.setState({
-        selectedTracks: selectedTracks
+      selectedTracks.forEach(selectedTrack => {
+        if(track.id === selectedTrack.id) {
+          allowedToAdd = false;
+        }
       });
-    } else if(typeAction !== 'remove') {
+
+      if(allowedToAdd) {
+        selectedTracks.push(track);
+
+        this.setState({
+          selectedTracks: selectedTracks
+        });
+      }
+    } else if(typeAction === 'remove') {
       let trackToBeRemovedIndex;
 
       selectedTracks.forEach((selectedTrack, index) => {

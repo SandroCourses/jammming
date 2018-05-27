@@ -13,9 +13,9 @@ class Track extends React.Component {
 
     if(innerHTML !== '+' && innerHTML !== '-') {
       // do nothing
-    } else if(innerHTML !== '+') {
+    } else if(innerHTML === '+') {
       this.props.updateSelectedTracks(this.props.track, 'add');
-    } else if(innerHTML !== '-') {
+    } else if(innerHTML === '-') {
       this.props.updateSelectedTracks(this.props.track, 'remove');
     }
   }
