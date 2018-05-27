@@ -67,7 +67,14 @@ const Spotify = {
           }
           throw new Error('request failed');
         }, networkError => console.log(networkError.message)).then(jsonResponse => {
-          return jsonResponse.tracks.items;
+          return jsonResponse.tracks.items.map(track => {
+            return {
+              id: track.id,
+              title: track.name,
+              artist: track.artists[0].name,
+              album: track.album.name
+            };
+          });
         });
       }
     }
