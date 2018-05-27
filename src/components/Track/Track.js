@@ -19,7 +19,7 @@ class Track extends React.Component {
           <h3>{this.props.track.title}</h3>
           <p>{this.props.track.artist} | {this.props.track.album}</p>
         </div>
-        <a className="track-action" onClick={this.handleClick} >+</a>
+        <a className="track-action" onClick={this.handleClick} >{this.props.typeButton}</a>
       </div>
     );
   }
