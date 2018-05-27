@@ -42,7 +42,7 @@ const Spotify = {
       this.accessToken = accessToken;
 
       const now = Date.now();
-      const expirationTime = new Date(now + (parseInt(expiresIn) * 1000));
+      const expirationTime = new Date(now + (parseInt(expiresIn, 10) * 1000));
       const expirationTimeInMs = expirationTime.getTime();
       this.expirationTimeInMs = expirationTimeInMs;
       window.history.pushState('Access Token', null, '/');
@@ -57,7 +57,7 @@ const Spotify = {
       if(searchInput) {
         const searchUrl = `https://api.spotify.com/v1/search?q=${searchInput}&type=album,artist,track`;
 
-        fetch(searchUrl, {
+        return fetch(searchUrl, {
           headers: {
             Authorization: 'Bearer ' + Spotify.accessToken
           }
@@ -67,7 +67,7 @@ const Spotify = {
           }
           throw new Error('request failed');
         }, networkError => console.log(networkError.message)).then(jsonResponse => {
-          console.log(jsonResponse.tracks.items[0].name);
+          return jsonResponse.tracks.items;
         });
       }
     }

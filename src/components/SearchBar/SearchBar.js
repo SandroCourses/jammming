@@ -10,10 +10,10 @@ class SearchBar extends React.Component {
       searchInput: ''
     };
 
-    this.handleOnKeyUp = this.handleOnKeyUp.bind(this);
+    this.changeSearchInput = this.changeSearchInput.bind(this);
   }
 
-  handleOnKeyUp(newSearchInput) {
+  changeSearchInput(newSearchInput) {
     this.setState({
       searchInput: newSearchInput
     });
@@ -22,8 +22,8 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div className="searchbar">
-        <SearchInput onKeyUp={this.handleOnKeyUp} />
-        <SearchButton searchInput={this.state.searchInput} />
+        <SearchInput onKeyUp={this.changeSearchInput} />
+        <SearchButton searchInput={this.state.searchInput} searchSpotify={this.props.searchSpotify} />
       </div>
     );
   }

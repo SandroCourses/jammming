@@ -6,8 +6,8 @@ class Track extends React.Component {
     return (
       <div className="track">
         <div className="track-information">
-          <h3>{"Visions of Johanna"}</h3>
-          <p>Bob Dylan | Blonde on Blonde</p>
+          <h3>{this.props.track.title}</h3>
+          <p>{this.props.track.artist} | {this.props.track.album}</p>
         </div>
         <a className="track-action">+</a>
       </div>
