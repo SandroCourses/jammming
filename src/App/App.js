@@ -15,10 +15,17 @@ class App extends React.Component {
     this.searchSpotify = this.searchSpotify.bind(this);
   }
 
-  searchSpotify(searchResults) {
-    this.setState({
-      searchResults: searchResults
-    });
+  searchSpotify(searchInput) {
+    const searchInputEncoded = searchInput.split(' ').join('%20');
+    const searchResultsPromise = Spotify.search(searchInputEncoded);
+
+    if(searchResultsPromise) {
+      searchResultsPromise.then(searchResults => {
+        this.setState({
+          searchResults: searchResults
+        });
+      });
+    }
   }
 
   render() {

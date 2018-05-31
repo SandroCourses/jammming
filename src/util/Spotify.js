@@ -59,7 +59,7 @@ const Spotify = {
 
         return fetch(searchUrl, {
           headers: {
-            Authorization: 'Bearer ' + Spotify.accessToken
+            'Authorization': 'Bearer ' + Spotify.accessToken
           }
         }).then(response => {
           if(response.ok) {
@@ -72,9 +72,79 @@ const Spotify = {
               id: track.id,
               title: track.name,
               artist: track.artists[0].name,
-              album: track.album.name
+              album: track.album.name,
+              uri: track.uri
             };
           });
+        });
+      }
+    }
+  },
+  getUserId() {
+    if(this.accessToken && this.expirationTimeInMs) {
+      if(Date.now() <= this.expirationTimeInMs) {
+        return fetch('https://api.spotify.com/v1/me', {
+          headers: {
+            'Authorization': 'Bearer ' + this.accessToken
+          }
+        }).then(response => {
+          if(response.ok) {
+            return response.json();
+          }
+
+          throw new Error('request failed');
+        }, networkError => console.log(networkError.message)).then(jsonResponse => {
+          return jsonResponse.id;
+        });
+      }
+    }
+  },
+  createPlaylist(userId, name) {
+    if(this.accessToken && this.expirationTimeInMs) {
+      if(Date.now() <= this.expirationTimeInMs) {
+        return fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+          method: 'POST',
+          body: JSON.stringify({
+            name: name,
+            public: true,
+            collaborative: false
+          }),
+          headers: {
+            'Authorization': 'Bearer ' + this.accessToken,
+            'Content-Type': 'application/json'
+          }
+        }).then(response => {
+          if(response.ok) {
+            return response.json();
+          }
+
+          throw new Error('request failed');
+        }, networkError => console.log(networkError.message)).then(jsonResponse => {
+          return jsonResponse.id;
+        });
+      }
+    }
+  },
+  addTracksToPlayList(userId, playlistId, uris) {
+    if(this.accessToken && this.expirationTimeInMs) {
+      if(Date.now() <= this.expirationTimeInMs) {
+        return fetch(`https://api.spotify.com/v1/users/${userId}/playlists/${playlistId}/tracks`, {
+          method: 'POST',
+          body: JSON.stringify({
+            uris: uris
+          }),
+          headers: {
+            'Authorization': 'Bearer ' + this.accessToken,
+            'Content-Type': 'application/json'
+          }
+        }).then(response => {
+          if(response.ok) {
+            return response.json();
+          }
+
+          throw new Error('request failed');
+        }, networkError => console.log(networkError.message)).then(jsonResponse => {
+          return jsonResponse;
         });
       }
     }

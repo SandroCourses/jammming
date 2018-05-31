@@ -12,6 +12,7 @@ class ContentContainer extends React.Component {
     };
 
     this.updateSelectedTracks = this.updateSelectedTracks.bind(this);
+    this.emptySelectedTracks = this.emptySelectedTracks.bind(this);
   }
 
   updateSelectedTracks(track, typeAction) {
@@ -54,11 +55,17 @@ class ContentContainer extends React.Component {
     }
   }
 
+  emptySelectedTracks() {
+    this.setState({
+      selectedTracks: []
+    });
+  }
+
   render() {
     return (
       <div className="content-container">
         <SearchResults tracks={this.props.searchResults} updateSelectedTracks={this.updateSelectedTracks} />
-        <Playlist tracks={this.state.selectedTracks} updateSelectedTracks={this.updateSelectedTracks} />
+        <Playlist tracks={this.state.selectedTracks} updateSelectedTracks={this.updateSelectedTracks} emptySelectedTracks={this.emptySelectedTracks} />
       </div>
     );
   }

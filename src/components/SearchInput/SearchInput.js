@@ -9,8 +9,7 @@ class SearchInput extends React.Component {
   }
 
   handleOnKeyUp(e) {
-    const value = e.target.value;
-    this.props.onKeyUp(value);
+    this.props.changeSearchInput(e.target.value);
   }
 
   render() {

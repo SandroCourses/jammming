@@ -22,7 +22,7 @@ class SearchBar extends React.Component {
   render() {
     return (
       <div className="searchbar">
-        <SearchInput onKeyUp={this.changeSearchInput} />
+        <SearchInput changeSearchInput={this.changeSearchInput} />
         <SearchButton searchInput={this.state.searchInput} searchSpotify={this.props.searchSpotify} />
       </div>
     );
